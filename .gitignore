@@ -1,0 +1,36 @@
+############################
+# GLOBAL
+############################
+.env
+*.log
+
+############################
+# BACK - SPRING BOOT
+############################
+back/target/
+back/.idea/
+back/.classpath
+back/.project
+back/.settings/
+
+# Config sensibles
+back/src/main/resources/application.yml
+back/src/main/resources/application-*.yml
+
+############################
+# FRONT - REACT
+############################
+front/node_modules/
+front/dist/
+front/build/
+front/.env
+front/.env.local
+front/.env.production
+front/.env.development
+
+############################
+# IDE
+############################
+.idea/
+.vscode/
+.DS_Store

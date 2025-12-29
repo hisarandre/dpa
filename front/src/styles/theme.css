@@ -1,0 +1,149 @@
+@layer base {
+    :root {
+        /* === GRIS (4 nuances) === */
+        --gray-950: 0 0% 6%;      /* Très foncé - fond principal */
+        --gray-900: 0 0% 10%;     /* Foncé - fond secondaire */
+        --gray-800: 0 0% 15%;     /* Moyen foncé - cartes */
+        --gray-700: 0 0% 25%;     /* Moyen - bordures */
+
+        /* Textes gris */
+        --gray-500: 0 0% 50%;     /* Texte moins lisible */
+        --gray-400: 0 0% 60%;     /* Texte secondaire */
+        --gray-300: 0 0% 70%;     /* Texte tertiaire */
+        --gray-200: 0 0% 80%;     /* Texte normal */
+        --gray-100: 0 0% 90%;     /* Texte clair */
+
+        /* === BLANC === */
+        --white: 0 0% 90%;
+
+        /* === ROUGE (4 nuances) === */
+        --red-700: 5 75% 40%;     /* Rouge foncé */
+        --red-600: 5 70% 45%;     /* Rouge moyen foncé */
+        --red-500: 5 65% 50%;     /* Rouge principal */
+        --red-400: 5 60% 55%;     /* Rouge moyen clair */
+        --red-300: 5 55% 65%;     /* Rouge clair */
+
+        /* === ORANGE (3 nuances) === */
+        --orange-600: 25 75% 45%;
+        --orange-500: 25 70% 50%;
+        --orange-400: 25 65% 60%;
+
+        /* === JAUNE (3 nuances) === */
+        --yellow-600: 45 85% 45%;
+        --yellow-500: 45 90% 55%;
+        --yellow-400: 45 85% 65%;
+
+        /* === VERT (3 nuances) === */
+        --green-600: 145 60% 35%;
+        --green-500: 145 65% 45%;
+        --green-400: 145 60% 55%;
+
+        /* === BLEU (3 nuances) === */
+        --blue-600: 220 75% 45%;
+        --blue-500: 220 70% 55%;
+        --blue-400: 220 65% 65%;
+
+        /* === VIOLET (3 nuances) === */
+        --purple-600: 270 65% 45%;
+        --purple-500: 270 60% 55%;
+        --purple-400: 270 55% 65%;
+
+        /* === ASSIGNATIONS SÉMANTIQUES === */
+        --background: var(--gray-950);
+        --foreground: var(--gray-200);
+
+        --primary: var(--red-500);
+        --primary-hover: var(--red-600);
+        --primary-foreground: var(--white);
+
+        --secondary: var(--gray-800);
+        --secondary-foreground: var(--gray-100);
+
+        --muted: var(--gray-800);
+        --muted-foreground: var(--gray-400);
+
+        --border: var(--gray-700);
+
+        --success: var(--green-500);
+        --warning: var(--yellow-500);
+        --destructive: var(--red-500);
+        --info: var(--blue-500);
+
+        --ring: var(--red-500);
+        --radius: 0.5rem;
+    }
+}
+
+@theme {
+    /* === COULEURS GRIS === */
+    --color-gray-950: hsl(var(--gray-950));
+    --color-gray-900: hsl(var(--gray-900));
+    --color-gray-800: hsl(var(--gray-800));
+    --color-gray-700: hsl(var(--gray-700));
+    --color-gray-500: hsl(var(--gray-500));
+    --color-gray-400: hsl(var(--gray-400));
+    --color-gray-300: hsl(var(--gray-300));
+    --color-gray-200: hsl(var(--gray-200));
+    --color-gray-100: hsl(var(--gray-100));
+
+    /* === BLANC === */
+    --color-white: hsl(var(--white));
+
+    /* === COULEURS ROUGE === */
+    --color-red-700: hsl(var(--red-700));
+    --color-red-600: hsl(var(--red-600));
+    --color-red-500: hsl(var(--red-500));
+    --color-red-400: hsl(var(--red-400));
+    --color-red-300: hsl(var(--red-300));
+
+    /* === COULEURS ORANGE === */
+    --color-orange-600: hsl(var(--orange-600));
+    --color-orange-500: hsl(var(--orange-500));
+    --color-orange-400: hsl(var(--orange-400));
+
+    /* === COULEURS JAUNE === */
+    --color-yellow-600: hsl(var(--yellow-600));
+    --color-yellow-500: hsl(var(--yellow-500));
+    --color-yellow-400: hsl(var(--yellow-400));
+
+    /* === COULEURS VERT === */
+    --color-green-600: hsl(var(--green-600));
+    --color-green-500: hsl(var(--green-500));
+    --color-green-400: hsl(var(--green-400));
+
+    /* === COULEURS BLEU === */
+    --color-blue-600: hsl(var(--blue-600));
+    --color-blue-500: hsl(var(--blue-500));
+    --color-blue-400: hsl(var(--blue-400));
+
+    /* === COULEURS VIOLET === */
+    --color-purple-600: hsl(var(--purple-600));
+    --color-purple-500: hsl(var(--purple-500));
+    --color-purple-400: hsl(var(--purple-400));
+
+    /* === ASSIGNATIONS SÉMANTIQUES === */
+    --color-background: hsl(var(--background));
+    --color-foreground: hsl(var(--foreground));
+
+    --color-primary: hsl(var(--primary));
+
+    --color-secondary: hsl(var(--secondary));
+
+    --color-muted: hsl(var(--muted));
+    --color-muted-foreground: hsl(var(--muted-foreground));
+
+    --color-border: hsl(var(--border));
+
+    --color-success: hsl(var(--success));
+    --color-warning: hsl(var(--warning));
+    --color-destructive: hsl(var(--destructive));
+    --color-info: hsl(var(--info));
+
+    --color-ring: hsl(var(--ring));
+
+    /* Border radius */
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+}
