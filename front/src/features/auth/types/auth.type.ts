@@ -16,11 +16,3 @@ export interface LoginResponse {
     refreshToken: string
     isActive: boolean
 }
-
-export interface AuthContextType {
-    isAuthenticated: boolean
-    login: (credentials: LoginType) => Promise<void>
-    register: (userData: RegisterType) => Promise<void>
-    logout: () => void
-    loading: boolean
-}

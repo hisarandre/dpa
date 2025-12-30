@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import type { UseFormSetError, FieldValues, Path } from 'react-hook-form'
-import { ApiErrorCode, isApiError } from '@/shared/types/api.type'
+import { ApiErrorCode, isApiError } from '@/shared/types/apiError.type'
 import { API_ERROR_MESSAGES } from '@/shared/errors/apiErrorMessages'
 import axios from 'axios'
 

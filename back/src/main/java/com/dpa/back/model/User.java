@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Entity
@@ -57,6 +58,17 @@ public class User {
     @Column(nullable = false)
     private Integer currentMoney = 100;
 
+
+    private String pronom;
+    private Date birthdate;
+    private String weapon1;
+    private String weapon2;
+    private String tattoo;
+    private String height;
+    private String physic;
+    private String avatarUrl;
+    private String referenceImageUrl;
+
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -64,4 +76,5 @@ public class User {
     @Column(name = "updated_at")
     @UpdateTimestamp
     private LocalDateTime updatedAt = LocalDateTime.now();
+
 }

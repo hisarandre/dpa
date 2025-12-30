@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LoginPage from '@/features/auth/pages/LoginPage'
 import RegisterPage from '@/features/auth/pages/RegisterPage'
-import Dashboard from '@/features/dashboard/pages/Dashboard'
-import {ProtectedRoute} from '@/features/auth/components/ProtectedRoute'
-import PublicRoute from '@/features/auth/components/PublicRoute'
+import DashboardPage from '@/features/dashboard/pages/DashboardPage'
+import {ProtectedRoute} from '@/features/auth/routes/ProtectedRoute'
+import PublicRoute from '@/features/auth/routes/PublicRoute'
 import {UserProvider} from "@/features/user/context/UserProvider";
 import { AuthProvider } from '@/features/auth/context/AuthProvider'
+import ProfilePage from "@/features/profile/pages/ProfilePage";
 
 function App() {
     return (
@@ -33,7 +34,15 @@ function App() {
                             path="/"
                             element={
                                 <ProtectedRoute>
-                                    <Dashboard />
+                                    <DashboardPage />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/profile"
+                            element={
+                                <ProtectedRoute>
+                                    <ProfilePage />
                                 </ProtectedRoute>
                             }
                         />

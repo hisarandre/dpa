@@ -1,4 +1,4 @@
-import { ApiErrorCode } from '@/shared/types/api.type'
+import { ApiErrorCode } from '@/shared/types/apiError.type'
 
 export const API_ERROR_MESSAGES: Partial<Record<ApiErrorCode, string>> = {
     [ApiErrorCode.INVALID_CREDENTIALS]: 'Identifiants incorrects',

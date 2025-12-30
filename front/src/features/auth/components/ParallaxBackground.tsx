@@ -1,4 +1,3 @@
-// Logo de fond avec parallax (desktop)
 import {motion, MotionValue} from "framer-motion";
 
 const LOGO_CONFIG = {

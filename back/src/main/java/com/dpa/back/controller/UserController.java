@@ -1,5 +1,6 @@
 package com.dpa.back.controller;
 
+import com.dpa.back.dto.user.UserProfileResponseDto;
 import com.dpa.back.dto.user.UserResponseDto;
 import com.dpa.back.model.User;
 import com.dpa.back.service.UserService;
@@ -21,13 +22,28 @@ public class UserController {
 
     @GetMapping("/me")
     public ResponseEntity<UserResponseDto> getCurrentUser(Authentication authentication) {
-        log.info("Retrieving current user profile");
+        log.info("Retrieving current user info");
 
         Long userId = Long.parseLong(authentication.getName());
 
         User user = userService.getUserById(userId);
 
         UserResponseDto responseDto = userMapper.toUserResponseDto(user);
+
+        log.info("Successfully retrieved info for user: {}", user.getUsername());
+
+        return ResponseEntity.ok(responseDto);
+    }
+
+    @GetMapping("/me/profile")
+    public ResponseEntity<UserProfileResponseDto> getMyProfile(Authentication authentication) {
+        log.info("Retrieving current user profile");
+
+        Long userId = Long.parseLong(authentication.getName());
+
+        User user = userService.getUserById(userId);
+
+        UserProfileResponseDto responseDto = userMapper.toUserProfileResponseDto(user);
 
         log.info("Successfully retrieved profile for user: {}", user.getUsername());
 

@@ -1,26 +1,16 @@
-// @ts-ignore
-export enum UserCategory {
-    DEFAULT = "DEFAULT",
-    ARMES_BLANCHES = "ARMES_BLANCHES",
-    ARMES_A_FEU = "ARMES_A_FEU",
-    MAINS_NUES = "MAINS_NUES",
-    EXPLOSIF = "EXPLOSIF",
-    HACKER = "HACKER"
-}
+import {CategoryType} from "@/features/user/types/category.type";
+import {RankType} from "@/features/user/types/rank.type";
 
 export interface UserType {
     id: number
+    technicalId: string
     username: string
     email: string
     firstName: string
     lastName: string
     role: string
     isActive: boolean
-    category: UserCategory
-}
-
-export interface UserContextType {
-    user: UserType | null
-    loading: boolean
-    refreshUser: () => Promise<void>
+    category: CategoryType
+    rank: RankType
+    currentMoney: number
 }

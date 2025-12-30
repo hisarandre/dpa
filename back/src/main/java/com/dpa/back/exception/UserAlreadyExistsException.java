@@ -22,7 +22,6 @@ public class UserAlreadyExistsException extends RuntimeException {
         this.field = field;
     }
 
-    // Méthode statique pour construire le message
     private static String buildMessage(String field, String value) {
         if ("username".equals(field)) {
             return "Le nom d'utilisateur '" + value + "' est déjà utilisé";

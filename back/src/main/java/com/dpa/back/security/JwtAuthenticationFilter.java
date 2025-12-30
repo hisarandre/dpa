@@ -40,7 +40,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = authHeader.substring(7);
 
             try {
-                // 🔥 ICI est la vraie validation
                 Claims claims = jwtUtil.parseToken(token);
 
                 if (SecurityContextHolder.getContext().getAuthentication() == null) {

@@ -1,6 +1,12 @@
 import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
-import type {UserContextType} from "@/features/user/types/user.type";
+import { UserType} from "@/features/user/types/user.type";
+
+export interface UserContextType {
+    user: UserType | null
+    loading: boolean
+    refreshUser: () => Promise<void>
+}
 
 export function useUser(): UserContextType {
     const context = useContext(UserContext)
