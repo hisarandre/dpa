@@ -1,7 +1,7 @@
 // components/ui/buttonLoading.tsx
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react'
-import { Loader2 } from 'lucide-react'
-import { Button } from '@/shared/components/ui/button'
+import {forwardRef, type ButtonHTMLAttributes, type ReactNode} from 'react'
+import {Loader2} from 'lucide-react'
+import {Button} from '@/shared/components/ui/button'
 
 export interface ButtonLoadingProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     loading?: boolean
@@ -33,7 +33,7 @@ const ButtonLoading = forwardRef<HTMLButtonElement, ButtonLoadingProps>(
             >
                 {loading ? (
                     <>
-                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin"/>
                         {loadingText || children}
                     </>
                 ) : (
@@ -46,4 +46,4 @@ const ButtonLoading = forwardRef<HTMLButtonElement, ButtonLoadingProps>(
 
 ButtonLoading.displayName = "ButtonLoading"
 
-export { ButtonLoading }
+export {ButtonLoading}

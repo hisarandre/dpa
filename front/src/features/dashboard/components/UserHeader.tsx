@@ -1,55 +1,48 @@
-import type { UserType } from '@/features/user/types/user.type'
-import { userCategoryStyles } from '@/shared/lib/userCategoryStyles'
-import { Badge } from '@/shared/components/ui/badge'
-import logo from '@/assets/logo.svg'
-import { categoryLabels } from '@/features/user/types/category.type'
-import { rankLabels } from '@/features/user/types/rank.type'
+import type {UserType} from '@/features/user/types/user.type'
+import {userCategoryStyles} from '@/shared/lib/userCategoryStyles'
+import {Badge} from '@/shared/components/ui/badge'
+import logo from '@/assets/images/logo.svg'
+import {categoryLabels} from '@/features/user/types/category.type'
+import {rankLabels} from '@/features/user/types/rank.type'
 
 interface UserHeaderProps {
     user: UserType
 }
 
-export function UserHeader({ user }: UserHeaderProps) {
+export function UserHeader({user}: UserHeaderProps) {
     const styles = userCategoryStyles[user.category]
+    // const styles = userCategoryStyles['ARMES_BLANCHES']
 
     return (
-        <div
-            className={`
-            relative overflow-hidden
-            flex items-center justify-between
-            sm:rounded-2xl
-            px-10 py-10
-            ${styles.gradient}
-          `}
-        >
-            {/* Background logo */}
+        <div className={`relative overflow-hidden flex items-center justify-between sm:rounded-2xl px-10 py-10 ${styles.gradient}`}>
             <img
                 src={logo}
-                alt=""
+                alt="Background logo"
                 aria-hidden
-                className="
-                  pointer-events-none
-                  absolute right-[-15%] top-1/2
-                  h-[180%]
-                  -translate-y-1/2
-                  opacity-5
-                  select-none
-                "
+                className="h-[180%] absolute right-[-11%] top-[-60%] opacity-5 pointer-events-none select-none"
             />
 
-            {/* Content */}
-            <div className="relative z-10 flex w-full items-center justify-between">
-                {/* Left */}
-                <div className="flex flex-col gap-2">
-                  <span className={`text-xs font-bold ${styles.hint}`}>
-                    #{user.technicalId}
-                  </span>
+            <div className="relative z-10 flex gap-4">
+                <div className="relative size-20 flex items-center justify-center">
+                    <div className="absolute w-full h-full rounded-full animate-ping bg-gray-dark opacity-50"></div>
+                    <img
+                        src="https://i.gyazo.com/f8a062652f75412dda3c89d0ab371e88.png"
+                        alt={`${user.firstName} ${user.lastName}`}
+                        className="relative size-18 rounded-full border-8 border-gray-dark/75 object-cover"
+                    />
+                </div>
 
-                    <h1 className={`text-2xl font-bold ${styles.text}`}>
+
+                <div className="flex flex-col gap-2">
+                    <p className={`text-xs font-bold font-mono`}>
+                        <span className={`${styles.text}`}>#</span>{user.technicalId}
+                    </p>
+
+                    <h1 className={`${styles.text}`}>
                         {user.firstName} {user.lastName}
                     </h1>
 
-                    <div className="flex gap-2">
+                    <div className="flex items-center gap-2">
                         <Badge variant="outline" className={styles.badge}>
                             {rankLabels[user.rank]}
                         </Badge>
@@ -57,28 +50,6 @@ export function UserHeader({ user }: UserHeaderProps) {
                         <Badge variant="outline" className={styles.badge}>
                             {categoryLabels[user.category]}
                         </Badge>
-                    </div>
-                </div>
-
-                {/* Right – money bubble */}
-                <div className="text-right">
-                    <div
-                        className="
-                          flex items-center gap-2
-                          rounded-full
-                          px-5 py-2
-                          bg-background/40
-                          backdrop-blur-md
-                          border border-border/40
-                          shadow-sm
-                        "
-                    >
-                        <span className="text-lg font-semibold tracking-tight">
-                          {user.currentMoney.toLocaleString()}
-                            <span className={`pl-2 ${styles.hint}`}>
-                                ¥
-                            </span>
-                        </span>
                     </div>
                 </div>
             </div>

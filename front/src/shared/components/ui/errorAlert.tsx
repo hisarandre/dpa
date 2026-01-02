@@ -1,11 +1,11 @@
-import { motion } from "framer-motion"
+import {motion} from "framer-motion"
 import {Alert, AlertDescription} from "@/shared/components/ui/alert";
 
-function ErrorAlert({ message }: { message: string }) {
+function ErrorAlert({message}: { message: string }) {
     return (
         <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{opacity: 0, y: -10}}
+            animate={{opacity: 1, y: 0}}
             role="alert"
             aria-live="assertive"
         >
@@ -15,4 +15,5 @@ function ErrorAlert({ message }: { message: string }) {
         </motion.div>
     )
 }
-export { ErrorAlert }
+
+export {ErrorAlert}

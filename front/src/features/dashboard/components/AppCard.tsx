@@ -17,39 +17,22 @@ export function AppCard({
                             locked = false,
                         }: AppCardProps) {
     const Content = (
-                <div
-                    className={cn(
-                            `
-                              relative
-                              flex flex-col items-center justify-center gap-2
-                              rounded-xl
-                              bg-gray-900
-                              text-gray-400
-                              aspect-square
-                              transition-colors duration-200
-                            `,
-                            locked
-                                ? 'opacity-30'
-                                : 'hover:text-gray-200 cursor-pointer'
-                        )}
-                >
-                {/* Icon / Lock */}
-                <div
-                    className="
-                      flex items-center justify-center
-                      text-gray-400
-                      text-4xl
-                      sm:text-3xl
-                      md:text-4xl
-                    "
-                    >
-                    {locked ? <Lock /> : icon}
-                </div>
+        <div
+            className={cn(
+                `relative flex flex-col items-center justify-center gap-3 rounded-xl bg-gray-semi text-gray-light aspect-square transition duration-300 group`,
+                locked
+                    ? 'opacity-30'
+                    : 'hover:bg-gray/20 hover:text-gray-lighter cursor-pointer'
+                )
+            }
+        >
+            <div className="flex items-center justify-center transition text-gray-light group-hover:text-gray-lighter">
+                {locked ? <Lock  /> : icon}
+            </div>
 
-            {/* Label */}
             <span className="text-xs font-medium truncate">
-        {label}
-      </span>
+                {label}
+            </span>
         </div>
     )
 

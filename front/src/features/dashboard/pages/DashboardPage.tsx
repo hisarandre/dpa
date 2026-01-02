@@ -13,7 +13,7 @@ export default function DashboardPage() {
             {user ? (
                 <UserHeader user={user} />
             ) : (
-                <div className="h-28 rounded-xl bg-muted animate-pulse sm:max-w-4xl sm:mx-auto" />
+                <div className="h-28 rounded-xl bg-gray-dark animate-pulse sm:max-w-4xl sm:mx-auto" />
             )}
 
             <div className="mt-6 p-8 sm:max-w-4xl sm:mx-auto">

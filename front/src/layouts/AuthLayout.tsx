@@ -46,7 +46,7 @@ export function AuthLayout({ children }: AuthLayoutProps) {
             <ParallaxBackground parallaxX={parallaxX} parallaxY={parallaxY} />
 
             <div
-                className="absolute inset-0 bg-gradient-to-br from-background/40 via-background/90 to-background/85"
+                className="absolute inset-0 bg-gradient-to-br from-gray-dark/40 via-gray-dark/90 to-gray-dark/85"
                 aria-hidden="true"
             />
 

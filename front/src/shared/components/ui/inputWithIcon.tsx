@@ -1,8 +1,8 @@
 // components/ui/inputWithIcon.tsx
-import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react'
-import { cn } from '@/shared/lib/utils'
-import { Label } from '@/shared/components/ui/label'
-import { Input } from '@/shared/components/ui/input'
+import {forwardRef, type InputHTMLAttributes, type ReactNode} from 'react'
+import {cn} from '@/shared/lib/utils'
+import {Label} from '@/shared/components/ui/label'
+import {Input} from '@/shared/components/ui/input'
 
 export interface InputWithIconProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string
@@ -37,7 +37,8 @@ const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
 
                 <div className="relative">
                     {icon && iconPosition === 'left' && (
-                        <div className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-500 pointer-events-none z-10">
+                        <div
+                            className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-500 pointer-events-none z-10">
                             {icon}
                         </div>
                     )}
@@ -58,7 +59,8 @@ const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
                     />
 
                     {icon && iconPosition === 'right' && (
-                        <div className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 pointer-events-none z-10">
+                        <div
+                            className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 pointer-events-none z-10">
                             {icon}
                         </div>
                     )}
@@ -76,4 +78,4 @@ const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
 
 InputWithIcon.displayName = "InputWithIcon"
 
-export { InputWithIcon }
+export {InputWithIcon}

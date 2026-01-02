@@ -46,7 +46,7 @@ export default function AvatarEditor({
         >
             {/* Modal */}
             <div
-                className="relative w-[360px] rounded-xl bg-background p-4 shadow-xl"
+                className="relative w-[360px] rounded-xl bg-gray-dark p-4 shadow-xl"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Header */}

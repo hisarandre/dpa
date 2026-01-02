@@ -37,4 +37,5 @@ function InputEmail({
         </div>
     )
 }
-export { InputEmail }
+
+export {InputEmail}

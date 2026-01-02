@@ -4,7 +4,7 @@ const LOGO_CONFIG = {
     size: '150vmax',
     minSize: '1800px',
     opacity: 0.2,
-    path: '/src/assets/logo.svg'
+    path: '/src/assets/images/logo.svg'
 }
 
 function ParallaxBackground({ parallaxX, parallaxY }: {

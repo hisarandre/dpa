@@ -2,7 +2,7 @@ import { ArrowLeft, Edit, Camera } from "lucide-react";
 import { motion, easeInOut } from "framer-motion";
 import type { UserProfileType } from "@/features/user/types/userProfile.type";
 import { userCategoryStyles } from "@/shared/lib/userCategoryStyles";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/images/logo.svg";
 import { Button } from "@/shared/components/ui/button";
 
 interface ProfileHeaderProps {

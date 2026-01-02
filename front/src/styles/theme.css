@@ -1,110 +1,33 @@
-@layer base {
-    :root {
-        /* ================================
-           GRIS — BASE UI
-        ================================= */
-        --gray-950: 0 0% 6%;
-        --gray-900: 0 0% 10%;
-        --gray-800: 0 0% 15%;
-        --gray-700: 0 0% 25%;
-        --gray-500: 0 0% 50%;
-        --gray-400: 0 0% 60%;
-        --gray-300: 0 0% 70%;
-        --gray-200: 0 0% 80%;
-        --gray-100: 0 0% 90%;
-        --white: 0 0% 90%;
+@theme inline {
+    --color-gray-dark: hsl(0 0% 6%);
+    --color-gray-semi: hsl(0 0% 9%);
+    --color-gray: hsl(0 0% 25%);
+    --color-gray-light: hsl(0 0% 70%);
+    --color-gray-lighter: hsl(0 0% 90%);
 
-        /* ================================
-           COULEURS PAR CATÉGORIE
-           base / soft / fade
-        ================================= */
+    --color-primary: hsl(7 57% 40%);
 
-        /* DEFAULT — Rouge */
-        --category-default: 7 57% 40%;
-        --category-default-soft: 7 50% 80%;
-        --category-default-fade: 5 65% 50% / 0.06;
+    /* CATEGORIES */
+    --color-category-melee: hsl(25 63% 38%);
+    --color-category-firearm: hsl(359 28% 53%);
+    --color-category-unarmed: hsl(51 80% 43%);
+    --color-category-explosive: hsl(229 58% 31%);
+    --color-category-hacker: hsl(80 76% 30%);
 
-        /* ARMES BLANCHES — Orange */
-        --category-melee: 25 70% 50%;
-        --category-melee-soft: 25 70% 50%;
-        --category-melee-fade: 25 70% 50% / 0.06;
-
-        /* ARMES À FEU — Rose */
-        --category-firearm: 355 30% 52%;
-        --category-firearm-soft: 345 10% 52%;
-        --category-firearm-fade: 355 30% 52% / 0.06;
-
-        /* MAINS NUES — Jaune */
-        --category-unarmed: 45 90% 55%;
-        --category-unarmed-soft: 45 90% 55%;
-        --category-unarmed-fade: 45 90% 55% / 0.06;
-
-        /* EXPLOSIF — Bleu */
-        --category-explosive: 220 70% 55%;
-        --category-explosive-soft: 220 70% 55%;
-        --category-explosive-fade: 220 70% 55% / 0.06;
-
-        /* HACKER — Vert */
-        --category-hacker: 145 65% 45%;
-        --category-hacker-soft: 145 65% 45%;
-        --category-hacker-fade: 145 65% 45% / 0.06;
-
-        /* ================================
-           TOKENS SÉMANTIQUES UI
-        ================================= */
-        --background: var(--gray-950);
-        --foreground: var(--gray-200);
-        --border: var(--gray-700);
-        --ring: var(--category-default);
-        --radius: 0.75rem;
-    }
-}
-
-@theme {
-    /* ================================
-       GRIS
-    ================================= */
-    --color-gray-950: hsl(var(--gray-950));
-    --color-gray-900: hsl(var(--gray-900));
-    --color-gray-800: hsl(var(--gray-800));
-    --color-gray-700: hsl(var(--gray-700));
-    --color-gray-500: hsl(var(--gray-500));
-    --color-gray-400: hsl(var(--gray-400));
-    --color-gray-300: hsl(var(--gray-300));
-    --color-gray-200: hsl(var(--gray-200));
-    --color-gray-100: hsl(var(--gray-100));
-    --color-white: hsl(var(--white));
-
-    /* ================================
-       CATÉGORIES (BASE)
-    ================================= */
-    --color-category-default: hsl(var(--category-default));
-    --color-category-default-soft: hsl(var(--category-default-soft));
-
-    --color-category-melee: hsl(var(--category-melee));
-
-    --color-category-firearm: hsl(var(--category-firearm));
-    --color-category-firearm-soft: hsl(var(--category-firearm-soft));
-
-    --color-category-unarmed: hsl(var(--category-unarmed));
-
-    --color-category-explosive: hsl(var(--category-explosive));
-
-    --color-category-hacker: hsl(var(--category-hacker));
-
-    /* ================================
-       UI
-    ================================= */
-    --color-background: hsl(var(--background));
-    --color-foreground: hsl(var(--foreground));
-    --color-border: hsl(var(--border));
-    --color-ring: hsl(var(--ring));
-
-    /* ================================
-       RADIUS
-    ================================= */
+    /* RADIUS */
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
-    --radius-lg: var(--radius);
+    --radius: 0.75rem;
     --radius-xl: calc(var(--radius) + 4px);
+
+    /* FONTS */
+    --font-mono: 'Source Code Pro', 'Courier New';
+
+    /* ANIMATION */
+    @keyframes ping {
+        75%, 100% {
+            transform: scale(1.1);
+            opacity: 0;
+        }
+    }
 }

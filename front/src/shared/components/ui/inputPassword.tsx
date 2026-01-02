@@ -1,10 +1,10 @@
 // components/ui/inputPassword.tsx
-import { forwardRef, useState, type InputHTMLAttributes } from 'react'
-import { Eye, EyeOff } from 'lucide-react'
-import { cn } from '@/shared/lib/utils'
-import { Label } from '@/shared/components/ui/label'
-import { Button } from '@/shared/components/ui/button'
-import { Input } from '@/shared/components/ui/input'
+import {forwardRef, useState, type InputHTMLAttributes} from 'react'
+import {Eye, EyeOff} from 'lucide-react'
+import {cn} from '@/shared/lib/utils'
+import {Label} from '@/shared/components/ui/label'
+import {Button} from '@/shared/components/ui/button'
+import {Input} from '@/shared/components/ui/input'
 
 export interface InputPasswordProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
     label?: string
@@ -64,9 +64,9 @@ const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
                         aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                     >
                         {showPassword ? (
-                            <EyeOff className="h-4 w-4 text-gray-400" />
+                            <EyeOff className="h-4 w-4 text-gray-400"/>
                         ) : (
-                            <Eye className="h-4 w-4 text-gray-400" />
+                            <Eye className="h-4 w-4 text-gray-400"/>
                         )}
                     </Button>
                 </div>
@@ -83,4 +83,4 @@ const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
 
 InputPassword.displayName = "InputPassword"
 
-export { InputPassword }
+export {InputPassword}
