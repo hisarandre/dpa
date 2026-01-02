@@ -38,7 +38,7 @@ const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
                 <div className="relative">
                     {icon && iconPosition === 'left' && (
                         <div
-                            className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-500 pointer-events-none z-10">
+                            className="absolute top-1/2 left-3 -translate-y-1/2 text-gray pointer-events-none z-10">
                             {icon}
                         </div>
                     )}
@@ -48,7 +48,7 @@ const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
                         id={inputId}
                         className={cn(
                             paddingClass,
-                            "text-white placeholder:text-gray-500",
+                            "text-white placeholder:text-gray",
                             "border-gray-700",
                             "focus-visible:ring-white/20 focus-visible:border-white/30",
                             error && "border-red-500 focus-visible:ring-red-500/20 aria-invalid:border-red-500",
@@ -60,7 +60,7 @@ const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
 
                     {icon && iconPosition === 'right' && (
                         <div
-                            className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 pointer-events-none z-10">
+                            className="absolute top-1/2 right-3 -translate-y-1/2 text-gray pointer-events-none z-10">
                             {icon}
                         </div>
                     )}
