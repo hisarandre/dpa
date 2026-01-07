@@ -1,17 +1,18 @@
-import {supabase} from "@/shared/lib/supabase";
+import { supabase } from "@/shared/lib/supabase";
 
-export async function uploadAvatar(
+export async function uploadReference(
     userId: number,
-    file: Blob
+    file: File
 ): Promise<string> {
-    const filePath = `${userId}/avatar.png`;
+    const fileExtension = file.name.split('.').pop();
+    const filePath = `${userId}/reference.${fileExtension}`;
 
     const { error } = await supabase.storage
         .from("uploads")
         .upload(filePath, file, {
             upsert: true,
-            contentType: "image/png",
-            cacheControl: "0", // Désactive le cache
+            contentType: file.type,
+            cacheControl: "0",
         });
 
     if (error) {
@@ -22,6 +23,5 @@ export async function uploadAvatar(
         .from("uploads")
         .getPublicUrl(filePath);
 
-    // Ajoute un timestamp pour forcer le refresh
     return `${data.publicUrl}?t=${Date.now()}`;
 }

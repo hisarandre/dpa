@@ -8,14 +8,14 @@ import {
     CardContent,
     CardFooter
 } from '@/shared/components/ui/card'
-import { ButtonLoading } from '@/shared/components/ui/buttonLoading'
+import {Button} from "@/shared/components/ui/button";
 
 export const SuccessRegistration = () => {
     return (
         <Card className="w-full max-w-md">
             <CardHeader className="text-center space-y-4">
-                <div className="mx-auto w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center">
-                    <CheckCircle2 className="w-10 h-10 text-green-500" />
+                <div className="mx-auto w-16 h-16 bg-category-hacker/20 rounded-full flex items-center justify-center">
+                    <CheckCircle2 className="w-10 h-10 text-category-hacker" />
                 </div>
 
                 <CardTitle className="text-2xl">
@@ -37,11 +37,9 @@ export const SuccessRegistration = () => {
 
             <CardFooter>
                 <Link to="/login" className="w-full">
-                    <ButtonLoading
-                        className="w-full h-11 text-base font-medium bg-white text-black hover:bg-gray-200 transition-colors"
-                    >
+                    <Button>
                         Retour à la connexion
-                    </ButtonLoading>
+                    </Button>
                 </Link>
             </CardFooter>
         </Card>

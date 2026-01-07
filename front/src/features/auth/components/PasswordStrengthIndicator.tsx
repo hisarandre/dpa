@@ -30,14 +30,14 @@ export function PasswordStrengthIndicator({ password, className = '' }: Password
     if (!password || allRequirementsMet) return null
 
     return (
-        <div className={`space-y-2 ${className}`}>
+        <div className={`space-y-2 mt-4 ${className}`}>
             {/* Barre de progression compacte */}
             <div className="flex items-center gap-1.5">
                 {results.map((result, index) => (
                     <div
                         key={index}
                         className={`h-1 flex-1 rounded-full transition-all duration-300 ${
-                            result.met ? 'bg-green-500' : 'bg-gray-200'
+                            result.met ? 'bg-category-hacker' : 'bg-gray-light'
                         }`}
                     />
                 ))}
@@ -49,7 +49,7 @@ export function PasswordStrengthIndicator({ password, className = '' }: Password
                     <div
                         key={index}
                         className={`flex items-center gap-1.5 text-xs transition-colors duration-200 ${
-                            result.met ? 'text-green-600' : 'text-gray-400'
+                            result.met ? 'text-category-hacker' : 'text-gray-light'
                         }`}
                     >
                         {result.met ? (

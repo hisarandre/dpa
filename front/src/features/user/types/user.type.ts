@@ -13,4 +13,5 @@ export interface UserType {
     category: CategoryType
     rank: RankType
     currentMoney: number
+    avatarUrl?: string
 }

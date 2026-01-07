@@ -1,4 +1,3 @@
-// components/ui/inputWithIcon.tsx
 import {forwardRef, type InputHTMLAttributes, type ReactNode} from 'react'
 import {cn} from '@/shared/lib/utils'
 import {Label} from '@/shared/components/ui/label'
@@ -11,7 +10,7 @@ export interface InputWithIconProps extends InputHTMLAttributes<HTMLInputElement
     error?: string
 }
 
-const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
+const InputDpa = forwardRef<HTMLInputElement, InputWithIconProps>(
     ({
          className,
          label,
@@ -30,7 +29,7 @@ const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
         return (
             <div className="space-y-2 w-full">
                 {label && (
-                    <Label htmlFor={inputId} className="text-gray-200">
+                    <Label htmlFor={inputId}>
                         {label}
                     </Label>
                 )}
@@ -48,10 +47,6 @@ const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
                         id={inputId}
                         className={cn(
                             paddingClass,
-                            "text-white placeholder:text-gray",
-                            "border-gray-700",
-                            "focus-visible:ring-white/20 focus-visible:border-white/30",
-                            error && "border-red-500 focus-visible:ring-red-500/20 aria-invalid:border-red-500",
                             className
                         )}
                         aria-invalid={error ? true : undefined}
@@ -76,6 +71,6 @@ const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
     }
 )
 
-InputWithIcon.displayName = "InputWithIcon"
+InputDpa.displayName = "InputDpa"
 
-export {InputWithIcon}
+export {InputDpa}

@@ -44,8 +44,14 @@ export function UserProvider({ children }: { children: ReactNode }) {
         }
     }
 
+    const updateUser = (data: Partial<UserType>) => {
+        setUser(prev =>
+            prev ? { ...prev, ...data } : prev
+        )
+    }
+
     return (
-        <UserContext.Provider value={{ user, loading, refreshUser }}>
+        <UserContext.Provider value={{ user, loading, refreshUser, updateUser }}>
             {children}
         </UserContext.Provider>
     )

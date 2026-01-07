@@ -9,14 +9,29 @@ export interface UserProfileType {
     role: string
     category: CategoryType
     rank: RankType
-    pronom?: string;
+
+    // general infos
+    pronoun?: string;
     birthdate?: string;
+    nationality?: string;
+    job?: string;
+
+    // body infos
+    tattoo?: string;
+    height?: number;
+    weight?: number;
+    eyeColor?: string;
+    hairColors?: string[];
+    skinTone?: string;
+
+    // weapon infos
+    accessories?: string;
     weapon1?: string;
     weapon2?: string;
-    tattoo?: string;
-    height?: string;
-    physic?: string;
+
+    // images
     avatarUrl?: string;
     referenceImageUrl?: string;
     referenceUploadDate?: string;
+    tagUrl?: string;
 }

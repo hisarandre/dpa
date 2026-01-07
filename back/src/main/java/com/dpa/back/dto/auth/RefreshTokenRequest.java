@@ -3,6 +3,6 @@ package com.dpa.back.dto.auth;
 import lombok.Data;
 
 @Data
-public class RefreshTokenRequestDto {
+public class RefreshTokenRequest {
     private String refreshToken;
 }

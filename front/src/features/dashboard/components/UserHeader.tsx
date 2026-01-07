@@ -1,9 +1,11 @@
 import type {UserType} from '@/features/user/types/user.type'
-import {userCategoryStyles} from '@/shared/lib/userCategoryStyles'
+import {userCategoryStyles} from '@/styles/userCategoryStyles'
 import {Badge} from '@/shared/components/ui/badge'
 import logo from '@/assets/images/logo.svg'
+import placeHolder from '@/assets/images/placeholder.png'
 import {categoryLabels} from '@/features/user/types/category.type'
 import {rankLabels} from '@/features/user/types/rank.type'
+import {easeInOut, motion} from 'framer-motion'
 
 interface UserHeaderProps {
     user: UserType
@@ -24,10 +26,24 @@ export function UserHeader({user}: UserHeaderProps) {
 
             <div className="relative z-10 flex gap-4">
                 <div className="relative size-20 flex items-center justify-center">
-                    <div className="absolute w-full h-full rounded-full animate-ping bg-gray-dark opacity-50"></div>
+                    <motion.div
+                        className="absolute inset-0 rounded-full bg-gray-dark opacity-50"
+                        animate={{
+                            scale: [1, 1.12, 1],
+                            opacity: [0.35, 0.15, 0.35],
+                        }}
+                        transition={{
+                            duration: 4,
+                            repeat: Infinity,
+                            ease: easeInOut,
+                        }}
+                    />
                     <img
-                        src="https://i.gyazo.com/f8a062652f75412dda3c89d0ab371e88.png"
-                        alt={`${user.firstName} ${user.lastName}`}
+                        src={
+                            user.avatarUrl ||
+                            placeHolder
+                        }
+                        alt="Profile picture"
                         className="relative size-18 rounded-full border-8 border-gray-dark/75 object-cover"
                     />
                 </div>

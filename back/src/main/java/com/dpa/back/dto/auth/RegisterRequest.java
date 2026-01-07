@@ -1,11 +1,11 @@
 package com.dpa.back.dto.auth;
 
+import com.dpa.back.enums.UserCategory;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
@@ -34,6 +34,10 @@ public class RegisterRequest {
 
     @NotBlank(message = "Last name is required")
     private String lastName;
+
+    @NotNull(message = "La catégorie est requise")
+    @Enumerated(EnumType.STRING)
+    private UserCategory category;
 
     public void setUsername(String username) {
         this.username = username != null ? username.toLowerCase().trim() : null;

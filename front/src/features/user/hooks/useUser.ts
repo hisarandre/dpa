@@ -1,11 +1,12 @@
 import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
-import { UserType} from "@/features/user/types/user.type";
+import type {UserType} from "@/features/user/types/user.type";
 
 export interface UserContextType {
     user: UserType | null
     loading: boolean
     refreshUser: () => Promise<void>
+    updateUser: (data: Partial<UserType>) => void
 }
 
 export function useUser(): UserContextType {

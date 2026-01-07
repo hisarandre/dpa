@@ -1,62 +1,102 @@
 import { useState } from "react";
 import { ProfileHeader } from "@/features/profile/components/ProfileHeader";
-import { useProfile } from "@/features/user/hooks/useProfile";
-import ProfileViewPage from "@/features/profile/pages/ProfileViewPage";
-import AvatarEditor from "@/features/profile/utils/AvatarEditor";
+import { useProfile } from "@/features/profile/hooks/useProfile";
+import AvatarEditor from "@/features/profile/components/AvatarEditor";
 import { uploadAvatar } from "@/shared/lib/supabase/uploadAvatar";
+import {useNavigate} from "react-router-dom";
+import {Tabs,TabsContent, TabsList, TabsTrigger} from "@/shared/components/ui/tabs";
+import {GeneralCard} from "@/features/profile/components/GeneralCard";
+import {MainContent, MainLayout} from "@/layouts/MainLayout";
+import type {Profile} from "@/features/profile/schemas/userProfile.schema";
+import {BodyCard} from "@/features/profile/components/BodyCard";
+import {ReferenceCard} from "@/features/profile/components/ReferenceCard";
+import {uploadReference} from "@/shared/lib/supabase/uploadReference";
+import {WeaponCard} from "@/features/profile/components/WeaponCard";
+import {TagCard} from "@/features/profile/components/TagCard";
+import {uploadTag} from "@/shared/lib/supabase/uploadTag";
 
 export default function ProfilePage() {
-    const [isEditing, setIsEditing] = useState(false);
     const [openAvatarEditor, setOpenAvatarEditor] = useState(false);
-
-    const { profile, updateProfile } = useProfile();
+    const { profile, updateAvatar, updateProfile, updateReference, updateTag } = useProfile();
+    const navigate = useNavigate()
 
     if (!profile) return null;
 
     const handleAvatarChange = async (blob: Blob) => {
         if (!profile) return;
-
         const url = await uploadAvatar(profile.id, blob);
-
-        await updateProfile({ avatarUrl: url });
-
+        await updateAvatar(url);
         setOpenAvatarEditor(false);
     };
 
+    const handleReferenceUpload = async (file: File) => {
+        if (!profile) return;
+        const url = await uploadReference(profile.id, file);
+        await updateReference(url);
+    };
+
+    const handleTagUpload = async (file: File) => {
+        if (!profile) return;
+        const url = await uploadTag(profile.id, file);
+        await updateTag(url);
+    };
+
+    const handleSave = async (data: Partial<Profile>) => {
+        await updateProfile(data);
+    };
+
     return (
-        <div className="min-h-screen p-0 sm:p-8">
-            {isEditing ? (
-                <>
-                    <ProfileHeader
-                        profile={profile}
-                        isEditing
-                        onBack={() => setIsEditing(false)}
-                        onEditAvatar={() => setOpenAvatarEditor(true)}
-                        onSwitchMode={() => {}}
-                    />
+        <MainLayout>
+            <ProfileHeader
+                user={profile}
+                isEditing
+                onBack={() => navigate('/')}
+                onEditAvatar={() => setOpenAvatarEditor(true)}
+            />
 
-                    {openAvatarEditor && (
-                        <AvatarEditor
-                            image={profile.avatarUrl}
-                            onSave={handleAvatarChange}
-                            onCancel={() => setOpenAvatarEditor(false)}
-                        />
-                    )}
-
-                    {/* UI MODE EDIT */}
-                </>
-            ) : (
-                <>
-                    <ProfileHeader
-                        profile={profile}
-                        isEditing={false}
-                        onSwitchMode={() => setIsEditing(true)}
-                    />
-
-                    {/* UI MODE VIEW */}
-                    <ProfileViewPage profile={profile} />
-                </>
+            {openAvatarEditor && (
+                <AvatarEditor
+                    image={profile.avatarUrl}
+                    onSave={handleAvatarChange}
+                    onCancel={() => setOpenAvatarEditor(false)}
+                />
             )}
-        </div>
+
+            <MainContent>
+                <Tabs defaultValue="general">
+                    <TabsList>
+                        <TabsTrigger value="general">Général</TabsTrigger>
+                        <TabsTrigger value="body">Physique</TabsTrigger>
+                        <TabsTrigger value="weapon">Arme(s) / Tag</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="general">
+                        <GeneralCard
+                            profile={profile}
+                            onSave={handleSave}
+                        />
+                    </TabsContent>
+                    <TabsContent value="body" className="flex flex-col gap-8">
+                        <BodyCard
+                            profile={profile}
+                            onSave={handleSave}
+                        />
+                        <ReferenceCard
+                            profile={profile}
+                            onSave={handleReferenceUpload}
+                        />
+                    </TabsContent>
+                    <TabsContent value="weapon" className="flex flex-col gap-8">
+                        <WeaponCard
+                            profile={profile}
+                            onSave={handleSave}
+                        />
+                        <TagCard
+                            profile={profile}
+                            onSave={handleTagUpload}
+                        />
+                    </TabsContent>
+                </Tabs>
+            </MainContent>
+        </MainLayout>
     );
 }

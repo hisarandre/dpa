@@ -1,148 +1,92 @@
-import { ArrowLeft, Edit, Camera } from "lucide-react";
+import { ArrowLeft, Camera } from "lucide-react";
 import { motion, easeInOut } from "framer-motion";
 import type { UserProfileType } from "@/features/user/types/userProfile.type";
-import { userCategoryStyles } from "@/shared/lib/userCategoryStyles";
+import { userCategoryStyles } from "@/styles/userCategoryStyles";
 import logo from "@/assets/images/logo.svg";
-import { Button } from "@/shared/components/ui/button";
+import placeHolder from "@/assets/images/placeholder.png";
+import {Badge} from "@/shared/components/ui/badge";
+import {rankLabels} from "@/features/user/types/rank.type";
+import {categoryLabels} from "@/features/user/types/category.type";
 
 interface ProfileHeaderProps {
-    profile: UserProfileType;
+    user: UserProfileType;
     isEditing?: boolean;
-    onSwitchMode: () => void;
     onBack?: () => void;
     onEditAvatar?: () => void;
 }
 
-const pulseAnimation = {
-    animate: {
-        scale: [1, 1.12, 1],
-        opacity: [0.35, 0.15, 0.35],
-    },
-    transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: easeInOut,
-    },
-};
-
-export function ProfileHeader({
-                                  profile,
-                                  isEditing = false,
-                                  onSwitchMode,
-                                  onBack,
-                                  onEditAvatar,
-                              }: ProfileHeaderProps) {
-    const styles = userCategoryStyles[profile.category];
+export function ProfileHeader({ user, isEditing = false, onBack, onEditAvatar }: ProfileHeaderProps) {
+    const styles = userCategoryStyles[user.category];
 
     return (
-        <div
-            className={`
-        relative overflow-hidden
-        flex items-center justify-center
-        sm:rounded-2xl
-        px-10 py-5
-        ${styles.gradient}
-      `}
-        >
+        <div className={`relative overflow-hidden sm:rounded-2xl px-10 py-6 ${styles.gradient}`}>
+
             {/* Background logo */}
             <img
                 src={logo}
-                alt=""
+                alt="Background logo"
                 aria-hidden
-                className="
-          pointer-events-none
-          absolute right-[-15%] top-1/2
-          h-[180%]
-          -translate-y-1/2
-          opacity-5
-          select-none
-        "
+                className="h-[180%] absolute right-[-11%] top-[-60%] opacity-5 pointer-events-none select-none"
             />
 
-            {/* ⬅️ Back */}
-            {onBack && (
-                <div className="absolute top-6 left-6 z-20">
-                    <Button
-                        size="icon"
-                        variant="ghost"
-                        onClick={onBack}
-                        className="text-white/80 hover:text-white"
-                    >
-                        <ArrowLeft className="w-6 h-6" />
-                    </Button>
-                </div>
-            )}
+            {/* Back arrow and id */}
+            <div className="relative z-10 flex items-center justify-between">
+                <button
+                    onClick={onBack}
+                    className={`${styles.text} hover:opacity-70 transition-opacity cursor-pointer`}
+                >
+                    <ArrowLeft className="size-6" />
+                </button>
 
-            {/* ✏️ Edit */}
-            {!isEditing && (
-                <div className="absolute top-6 right-6 z-20">
-                    <Button
-                        variant="ghost"
-                        onClick={onSwitchMode}
-                        className="text-white/80 hover:text-white"
-                    >
-                        <Edit className="w-4 h-4 mr-2" />
-                        Edit
-                    </Button>
-                </div>
-            )}
+                <p className={`text-xs font-bold font-mono`}>
+                    <span className={`${styles.text}`}>#</span>{user.technicalId}
+                </p>
+            </div>
 
             {/* Content */}
-            <div className="relative z-10 flex flex-col items-center gap-3">
-                {/* Avatar */}
-                <div className="relative group">
-                    {/* Pulsing ring */}
+            <div className="relative z-10 flex flex-col items-center gap-4">
+                <div
+                    className={`relative size-33 flex items-center justify-center group ${isEditing ? 'cursor-pointer' : ''}`}
+                    onClick={isEditing ? onEditAvatar : undefined}
+                >
                     <motion.div
-                        className="absolute inset-0 rounded-full bg-black"
-                        {...pulseAnimation}
+                        className="absolute inset-0 rounded-full bg-gray-dark opacity-50"
+                        animate={{
+                            scale: [1, 1.12, 1],
+                            opacity: [0.35, 0.15, 0.35],
+                        }}
+                        transition={{
+                            duration: 4,
+                            repeat: Infinity,
+                            ease: easeInOut,
+                        }}
+                    />
+                    <img
+                        src={user.avatarUrl || placeHolder}
+                        alt="Profile picture"
+                        className="relative size-30 rounded-full border-8 border-gray-dark/75 object-cover"
                     />
 
-                    {/* Avatar container */}
-                    <div
-                        className="
-                          relative w-32 h-32 rounded-full
-                          border-8 border-black/40
-                          bg-black/10
-                          backdrop-blur-sm
-                          shadow-2xl
-                          overflow-hidden
-                        "
-                    >
-                        <img
-                            src={
-                                profile.avatarUrl ||
-                                "https://i.gyazo.com/f8a062652f75412dda3c89d0ab371e88.png"
-                            }
-                            alt={`${profile.firstName} ${profile.lastName}`}
-                            className="w-full h-full object-cover"
-                        />
-
-                        {/* 🖼️ Edit avatar overlay */}
-                        {isEditing && onEditAvatar && (
-                            <button
-                                onClick={onEditAvatar}
-                                className="
-                                  absolute inset-0
-                                  flex items-center justify-center
-                                  bg-black/50
-                                  opacity-0 group-hover:opacity-100
-                                  transition
-                                "
-                            >
-                                <Camera className="w-6 h-6 text-white" />
-                            </button>
-                        )}
-                    </div>
+                    {/* Edit mode - Overlay */}
+                    {isEditing && (
+                        <div className="absolute inset-0 rounded-full bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <Camera className="size-8 text-white" />
+                        </div>
+                    )}
                 </div>
 
-                {/* Name + code */}
-                <div className="text-center">
-                    <h1 className={`text-xl font-bold ${styles.text}`}>
-                        {profile.firstName} {profile.lastName}
-                    </h1>
-                    <p className={`text-sm ${styles.hint}`}>
-                        #{profile.technicalId}
-                    </p>
+                <h1 className={`text-2xl font-bold ${styles.text}`}>
+                    {user.firstName} {user.lastName}
+                </h1>
+
+                <div className="flex items-center gap-2">
+                    <Badge variant="outline" className={styles.badge}>
+                        {rankLabels[user.rank]}
+                    </Badge>
+
+                    <Badge variant="outline" className={styles.badge}>
+                        {categoryLabels[user.category]}
+                    </Badge>
                 </div>
             </div>
         </div>

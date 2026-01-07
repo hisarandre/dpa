@@ -2,7 +2,7 @@ package com.dpa.back.controller;
 
 import com.dpa.back.dto.auth.AuthResponse;
 import com.dpa.back.dto.auth.LoginRequest;
-import com.dpa.back.dto.auth.RefreshTokenRequestDto;
+import com.dpa.back.dto.auth.RefreshTokenRequest;
 import com.dpa.back.dto.auth.RegisterRequest;
 import com.dpa.back.service.AuthService;
 import jakarta.validation.Valid;
@@ -43,7 +43,7 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<AuthResponse> refresh(@RequestBody RefreshTokenRequestDto request) {
+    public ResponseEntity<AuthResponse> refresh(@RequestBody RefreshTokenRequest request) {
         AuthResponse response = authService.refreshToken(request.getRefreshToken());
         return ResponseEntity.ok(response);
     }

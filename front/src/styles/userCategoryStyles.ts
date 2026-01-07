@@ -29,7 +29,7 @@ export const userCategoryStyles: Record<CategoryType, {
         `,
         text: 'text-category-melee',
         hint: 'text-category-melee/70',
-        badge: 'border-category-melee/40 text-category-melee/90',
+        badge: 'border-category-melee/40 text-gray-light',
     },
 
     [CategoryType.ARMES_A_FEU]: {
@@ -41,8 +41,8 @@ export const userCategoryStyles: Record<CategoryType, {
             to-gray-dark
         `,
         text: 'text-category-firearm',
-        hint: 'text-category-firearm-soft',
-        badge: 'border-category-firearm-soft/40 text-gray-light',
+        hint: 'text-category-firearm/70',
+        badge: 'border-category-firearm/40 text-gray-light',
     },
 
     [CategoryType.MAINS_NUES]: {
@@ -55,7 +55,7 @@ export const userCategoryStyles: Record<CategoryType, {
         `,
         text: 'text-category-unarmed',
         hint: 'text-category-unarmed/70',
-        badge: 'border-category-unarmed/40 text-category-unarmed/90',
+        badge: 'border-category-unarmed/40 text-gray-light',
     },
 
     [CategoryType.EXPLOSIF]: {
@@ -68,7 +68,7 @@ export const userCategoryStyles: Record<CategoryType, {
         `,
         text: 'text-category-explosive',
         hint: 'text-category-explosive/70',
-        badge: 'border-category-explosive/40 text-category-explosive/90',
+        badge: 'border-category-explosive/40 text-gray-light',
     },
 
     [CategoryType.HACKER]: {
@@ -81,6 +81,6 @@ export const userCategoryStyles: Record<CategoryType, {
         `,
         text: 'text-category-hacker',
         hint: 'text-category-hacker/70',
-        badge: 'border-category-hacker/40 text-category-hacker/90',
+        badge: 'border-category-hacker/40 text-gray-light',
     },
 }

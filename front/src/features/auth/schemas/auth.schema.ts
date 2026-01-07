@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import {CategoryType} from "@/features/user/types/category.type";
 
 export const loginSchema = z.object({
     username: z.string()
@@ -32,7 +33,8 @@ export const registerSchema = z.object({
     lastName: z.string()
         .min(2, "Le nom doit contenir au moins 2 caractères")
         .max(50, "Le nom est trop long")
-        .trim()
+        .trim(),
+    category: z.enum(Object.values(CategoryType))
 }).refine((data) => data.password === data.confirmPassword, {
     message: "Les mots de passe ne correspondent pas",
     path: ["confirmPassword"]

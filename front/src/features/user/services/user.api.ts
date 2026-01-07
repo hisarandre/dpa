@@ -1,6 +1,7 @@
 import type { UserType } from '../types/user.type'
-import { UserProfileType } from "@/features/user/types/userProfile.type";
+import type {UserProfileType} from "@/features/user/types/userProfile.type";
 import api from "@/shared/lib/api";
+import type {Profile} from "@/features/profile/schemas/userProfile.schema";
 
 class UserApi {
     async getMe(): Promise<UserType> {
@@ -13,8 +14,23 @@ class UserApi {
         return response.data
     }
 
-    async updateProfile(profile: Partial<UserProfileType>): Promise<UserProfileType> {
-        const response = await api.put<UserProfileType>('/users/me/profile', profile)
+    async updateAvatar(url: string): Promise<UserProfileType> {
+        const response = await api.patch<UserProfileType>('/users/me/avatar', { url })
+        return response.data
+    }
+
+    async updateProfile(profile: Partial<Profile>): Promise<UserProfileType> {
+        const response = await api.patch<UserProfileType>('/users/me/profile', profile)
+        return response.data
+    }
+
+    async updateReference(url: string): Promise<UserProfileType> {
+        const response = await api.patch<UserProfileType>('/users/me/reference', { url })
+        return response.data
+    }
+
+    async updateTag(url: string): Promise<UserProfileType> {
+        const response = await api.patch<UserProfileType>('/users/me/tag', { url })
         return response.data
     }
 }

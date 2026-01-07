@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserResponseDto {
+public class UserResponse {
     private String technicalId;
     private String email;
     private String username;
@@ -20,4 +20,5 @@ public class UserResponseDto {
     private UserCategory category;
     private UserRank rank;
     private Integer currentMoney;
+    private String avatarUrl;
 }

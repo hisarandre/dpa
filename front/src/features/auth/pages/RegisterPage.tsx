@@ -1,31 +1,38 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { User, Mail } from 'lucide-react'
-import { useForm } from 'react-hook-form'
+import {Controller, useForm} from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AuthLayout } from '@/layouts/AuthLayout'
 import {
     Card, CardContent, CardFooter, CardHeader, CardTitle
 } from '@/shared/components/ui/card'
-import { InputPassword } from '@/shared/components/ui/inputPassword'
-import { InputWithIcon } from '@/shared/components/ui/inputWithIcon'
-import { ButtonLoading } from '@/shared/components/ui/buttonLoading'
-import { ErrorAlert } from '@/shared/components/ui/errorAlert'
+import { InputPassword } from '@/shared/components/inputPassword'
+import { InputDpa } from '@/shared/components/inputDpa'
+import { ErrorAlert } from '@/shared/components/errorAlert'
 import { registerSchema, type RegisterFormData } from '@/features/auth/schemas/auth.schema'
 import { useApiError } from '@/shared/hooks/useApiError'
 import { SuccessRegistration } from "@/features/auth/components/SuccessRegistration"
 import { PasswordStrengthIndicator } from "@/features/auth/components/PasswordStrengthIndicator"
 import {useAuth} from "@/features/auth/hooks/useAuth";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/shared/components/ui/select'
+import {categoryLabels, CategoryType} from "@/features/user/types/category.type";
+import {Button} from "@/shared/components/ui/button";
+
 
 export default function RegisterPage() {
-    const [showPassword, setShowPassword] = useState(false)
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [serverError, setServerError] = useState('')
     const [registrationSuccess, setRegistrationSuccess] = useState(false)
 
     const { register: registerUser } = useAuth()
 
-    const { register, handleSubmit, formState: { errors, isSubmitting }, setError, watch } =
+    const { register, handleSubmit, control, formState: { errors, isSubmitting }, setError, watch } =
         useForm<RegisterFormData>({
             resolver: zodResolver(registerSchema),
             mode: 'onBlur'
@@ -42,7 +49,8 @@ export default function RegisterPage() {
         !formValues.password ||
         !formValues.confirmPassword ||
         !formValues.firstName ||
-        !formValues.lastName
+        !formValues.lastName ||
+        !formValues.category
 
     const onSubmit = async (data: RegisterFormData) => {
         setServerError('')
@@ -73,7 +81,7 @@ export default function RegisterPage() {
                     <CardContent className="space-y-5">
                         {serverError && <ErrorAlert message={serverError} />}
 
-                        <InputWithIcon
+                        <InputDpa
                             label="Nom d'utilisateur"
                             icon={<User className="h-4 w-4" />}
                             id="username"
@@ -86,7 +94,7 @@ export default function RegisterPage() {
                         />
 
                         <div className="grid grid-cols-2 gap-4">
-                            <InputWithIcon
+                            <InputDpa
                                 label="Prénom"
                                 id="firstName"
                                 type="text"
@@ -97,7 +105,7 @@ export default function RegisterPage() {
                                 error={errors.firstName?.message}
                             />
 
-                            <InputWithIcon
+                            <InputDpa
                                 label="Nom"
                                 id="lastName"
                                 type="text"
@@ -109,7 +117,7 @@ export default function RegisterPage() {
                             />
                         </div>
 
-                        <InputWithIcon
+                        <InputDpa
                             label="Email"
                             icon={<Mail className="h-4 w-4" />}
                             id="email"
@@ -129,8 +137,6 @@ export default function RegisterPage() {
                                 {...register('password')}
                                 disabled={isSubmitting}
                                 autoComplete="new-password"
-                                showPassword={showPassword}
-                                onToggleVisibility={() => setShowPassword(prev => !prev)}
                                 error={errors.password?.message}
                             />
 
@@ -145,27 +151,59 @@ export default function RegisterPage() {
                             {...register('confirmPassword')}
                             disabled={isSubmitting}
                             autoComplete="new-password"
-                            showPassword={showConfirmPassword}
-                            onToggleVisibility={() => setShowConfirmPassword(prev => !prev)}
                             error={errors.confirmPassword?.message}
+                        />
+
+                        <Controller
+                            control={control}
+                            name="category"
+                            render={({ field }) => (
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">
+                                        Catégorie
+                                    </label>
+
+                                    <Select
+                                        value={field.value}
+                                        onValueChange={field.onChange}
+                                        disabled={isSubmitting}
+                                    >
+                                        <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="Sélectionner une catégorie" />
+                                        </SelectTrigger>
+
+                                        <SelectContent>
+                                            {Object.values(CategoryType).map((category) => (
+                                                <SelectItem key={category} value={category}>
+                                                    {categoryLabels[category]}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+
+                                    {errors.category && (
+                                        <p className="text-sm text-destructive">
+                                            {errors.category.message}
+                                        </p>
+                                    )}
+                                </div>
+                            )}
                         />
                     </CardContent>
 
                     <CardFooter className="flex flex-col space-y-4 pt-8">
-                        <ButtonLoading
+                        <Button
                             type="submit"
                             disabled={isSubmitting || isFormInvalid}
-                            className="w-full h-11 text-base font-medium bg-white text-black hover:bg-gray-200"
-                            loading={isSubmitting}
-                            loadingText="Création du compte..."
+                            size="full"
                         >
-                            Créer un compte
-                        </ButtonLoading>
+                            {isSubmitting ? "Création..." : "S'inscrire"}
+                        </Button>
 
                         <div className="text-center space-y-2">
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-gray-light">
                                 Vous avez déjà un compte ?{' '}
-                                <Link to="/login" className="text-primary hover:text-red-600 font-semibold">
+                                <Link to="/login" className="text-primary hover:text-primary/70 font-semibold">
                                     Se connecter
                                 </Link>
                             </p>

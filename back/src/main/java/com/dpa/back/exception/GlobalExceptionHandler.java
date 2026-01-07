@@ -141,18 +141,6 @@ public class GlobalExceptionHandler {
         );
     }
 
-    // ==================== File Upload Errors ====================
-
-    @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public ResponseEntity<ErrorResponse> handleMaxUploadSizeExceeded(MaxUploadSizeExceededException ex) {
-        log.warn("Upload size exceeded: {}", ex.getMessage());
-
-        return buildErrorResponse(
-                HttpStatus.BAD_REQUEST,
-                "FILE_SIZE_LIMIT_EXCEEDED",
-                "The uploaded file is too large. Maximum allowed size is 5MB."
-        );
-    }
 
     // ==================== General Errors ====================
 

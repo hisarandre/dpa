@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -49,7 +50,7 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private UserCategory category = UserCategory.DEFAULT;
+    private UserCategory category;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -58,16 +59,31 @@ public class User {
     @Column(nullable = false)
     private Integer currentMoney = 100;
 
-
-    private String pronom;
+    // general info
+    private String pronoun;
     private Date birthdate;
+    private String nationality;
+    private String job;
+
+    //body
+    private String tattoo;
+    private Integer height;
+    private Double weight;
+    private String eyeColor;
+    private String[] hairColors;
+    private String skinTone;
+
+    //weapon
+    private String accessories;
     private String weapon1;
     private String weapon2;
-    private String tattoo;
-    private String height;
-    private String physic;
+
+    // images
     private String avatarUrl;
     private String referenceImageUrl;
+    private LocalDate referenceUploadDate;
+    private String tagUrl;
+
 
     @CreationTimestamp
     @Column(name = "created_at")

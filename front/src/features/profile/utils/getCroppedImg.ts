@@ -3,6 +3,7 @@ export async function getCroppedImg(
     crop: any
 ): Promise<Blob> {
     const image = new Image();
+    image.crossOrigin = "anonymous"
     image.src = imageSrc;
     await new Promise((res) => (image.onload = res));
 
@@ -24,6 +25,6 @@ export async function getCroppedImg(
     );
 
     return new Promise((resolve) =>
-        canvas.toBlob((blob) => resolve(blob!), "image/png")
+        canvas.toBlob((blob) => resolve(blob!), "image/jpg")
     );
 }

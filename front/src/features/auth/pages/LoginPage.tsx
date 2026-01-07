@@ -5,16 +5,15 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AuthLayout } from '@/layouts/AuthLayout'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/shared/components/ui/card'
-import { InputPassword } from '@/shared/components/ui/inputPassword'
-import { InputWithIcon } from '@/shared/components/ui/inputWithIcon'
-import { ButtonLoading } from '@/shared/components/ui/buttonLoading'
-import { ErrorAlert } from '@/shared/components/ui/errorAlert'
+import { InputPassword } from '@/shared/components/inputPassword'
+import { InputDpa } from '@/shared/components/inputDpa'
+import { ErrorAlert } from '@/shared/components/errorAlert'
 import { loginSchema, type LoginFormData } from '@/features/auth/schemas/auth.schema'
 import { useApiError } from '@/shared/hooks/useApiError'
 import {useAuth} from "@/features/auth/hooks/useAuth";
+import {Button} from "@/shared/components/ui/button";
 
 export default function LoginPage() {
-    const [showPassword, setShowPassword] = useState(false)
     const [serverError, setServerError] = useState('')
 
     const { login } = useAuth()
@@ -62,7 +61,7 @@ export default function LoginPage() {
                     <CardContent className="space-y-5">
                         {serverError && <ErrorAlert message={serverError} />}
 
-                        <InputWithIcon
+                        <InputDpa
                             label="Nom d'utilisateur"
                             icon={<User className="h-4 w-4" />}
                             id="username"
@@ -81,27 +80,24 @@ export default function LoginPage() {
                             {...register('password')}
                             disabled={isSubmitting}
                             autoComplete="current-password"
-                            showPassword={showPassword}
-                            onToggleVisibility={() => setShowPassword(prev => !prev)}
                             error={errors.password?.message}
                         />
                     </CardContent>
 
                     <CardFooter className="flex flex-col space-y-4 pt-8">
-                        <ButtonLoading
+
+                        <Button
                             type="submit"
                             disabled={isSubmitting || isFormInvalid}
-                            className="w-full h-11 text-base font-medium bg-white text-gray-800 hover:bg-gray-200"
-                            loading={isSubmitting}
-                            loadingText="Connexion..."
+                            size="full"
                         >
-                            Se connecter
-                        </ButtonLoading>
+                            {isSubmitting ? "Connexion..." : "Se connecter"}
+                        </Button>
 
                         <div className="text-center space-y-2">
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-gray-light">
                                 Pas encore de compte ?{' '}
-                                <Link to="/register" className="text-primary hover:text-red-600 font-semibold">
+                                <Link to="/register" className="text-primary hover:text-primary/70 font-semibold">
                                     Créer un compte
                                 </Link>
                             </p>
