@@ -2,13 +2,13 @@ import { Button } from "@/shared/components/ui/button";
 import { useState } from "react";
 import { Card, CardContent, CardHeader } from "@/shared/components/ui/card";
 import { Upload, X } from "lucide-react";
-import type { UserProfileType } from "@/features/user/types/userProfile.type";
+import type { UserProfileType } from "@/features/profile/types/userProfile.type";
 import placeHolder from "@/assets/images/placeholder.png";
 import {ErrorAlert} from "@/shared/components/errorAlert";
 
 interface ReferenceCardProps {
     profile: UserProfileType;
-    onSave: (file: File) => Promise<void>;
+    onSave?: (file: File) => Promise<void>;
 }
 
 export function ReferenceCard({ profile, onSave }: ReferenceCardProps) {
@@ -20,6 +20,7 @@ export function ReferenceCard({ profile, onSave }: ReferenceCardProps) {
     const ALLOWED_TYPES = ['image/jpeg', 'image/jpg'];
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!onSave) return;
         const file = e.target.files?.[0];
         if (!file) return;
 
@@ -60,16 +61,18 @@ export function ReferenceCard({ profile, onSave }: ReferenceCardProps) {
             <Card variant="dpa">
                 <CardHeader className="flex justify-end">
                     <label htmlFor="reference-upload">
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            disabled={isUploading}
-                            asChild
-                        >
+                        {onSave && (
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                disabled={isUploading}
+                                asChild
+                            >
                             <span className="cursor-pointer">
                                 {isUploading ? "..." : <Upload className="h-4 w-4" />}
                             </span>
-                        </Button>
+                            </Button>
+                        )}
                     </label>
                     <input
                         id="reference-upload"

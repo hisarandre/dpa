@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/shared/components/ui/card";
 import { Pencil } from "lucide-react";
 import { InfoGrid, InfoRow } from "@/shared/components/infoRow";
-import type { UserProfileType } from "@/features/user/types/userProfile.type";
+import type { UserProfileType } from "@/features/profile/types/userProfile.type";
 import { generalInfoSchema, type GeneralInfo } from "@/features/profile/schemas/userProfile.schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,7 +11,7 @@ import {InputDpa} from "@/shared/components/inputDpa";
 
 interface GeneralInfoCardProps {
     profile: UserProfileType;
-    onSave: (data: GeneralInfo) => Promise<void>;
+    onSave?: (data: GeneralInfo) => Promise<void>;
 }
 
 export function GeneralCard({ profile, onSave }: GeneralInfoCardProps) {
@@ -31,13 +31,15 @@ export function GeneralCard({ profile, onSave }: GeneralInfoCardProps) {
     });
 
     const onSubmit = async (data: GeneralInfo) => {
+        if (!onSave) return
+
         try {
-            await onSave(data);
-            setIsEditing(false);
+            await onSave(data)
+            setIsEditing(false)
         } catch (error) {
-            console.error("Erreur lors de la sauvegarde:", error);
+            console.error("Erreur lors de la sauvegarde:", error)
         }
-    };
+    }
 
     const handleCancel = () => {
         reset();
@@ -141,9 +143,15 @@ export function GeneralCard({ profile, onSave }: GeneralInfoCardProps) {
     return (
         <Card variant="dpa">
             <CardHeader className="flex justify-end">
-                <Button variant="ghost" size="icon" onClick={() => setIsEditing(true)}>
-                    <Pencil className="h-4 w-4" />
-                </Button>
+                {onSave && (
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setIsEditing(true)}
+                    >
+                        <Pencil className="h-4 w-4" />
+                    </Button>
+                )}
             </CardHeader>
             <CardContent>
                 <InfoGrid>

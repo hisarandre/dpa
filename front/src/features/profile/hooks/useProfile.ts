@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import type {UserProfileType} from '../../user/types/userProfile.type'
+import type {UserProfileType} from '../types/userProfile.type'
 import { userApi } from '../../user/services/user.api'
 import { useUser } from '../../user/hooks/useUser'
 import { AxiosError } from 'axios'

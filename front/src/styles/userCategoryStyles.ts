@@ -2,6 +2,7 @@ import { CategoryType } from '@/features/user/types/category.type'
 
 export const userCategoryStyles: Record<CategoryType, {
     gradient: string
+    gradientFromRight: string
     text: string
     hint: string
     badge: string
@@ -14,12 +15,13 @@ export const userCategoryStyles: Record<CategoryType, {
             via-primary/5
             to-gray-dark
         `,
+        gradientFromRight:'from-primary/70',
         text: 'text-primary',
         hint: 'text-primary/50',
         badge: 'border-primary/50 text-gray-light',
     },
 
-    [CategoryType.ARMES_BLANCHES]: {
+    [CategoryType.MELEE]: {
         gradient: `
             bg-gradient-to-b
             from-category-melee/30
@@ -27,12 +29,13 @@ export const userCategoryStyles: Record<CategoryType, {
             via-category-melee/5
             to-gray-dark
         `,
+        gradientFromRight:'from-category-melee/70',
         text: 'text-category-melee',
         hint: 'text-category-melee/70',
         badge: 'border-category-melee/40 text-gray-light',
     },
 
-    [CategoryType.ARMES_A_FEU]: {
+    [CategoryType.FIREARM]: {
         gradient: `
             bg-gradient-to-b
             from-category-firearm/30
@@ -40,12 +43,13 @@ export const userCategoryStyles: Record<CategoryType, {
             via-category-firearm/5
             to-gray-dark
         `,
+        gradientFromRight:'from-category-firearm/70',
         text: 'text-category-firearm',
         hint: 'text-category-firearm/70',
         badge: 'border-category-firearm/40 text-gray-light',
     },
 
-    [CategoryType.MAINS_NUES]: {
+    [CategoryType.HAND_TO_HAND]: {
         gradient: `
             bg-gradient-to-b
             from-category-unarmed/30
@@ -53,12 +57,13 @@ export const userCategoryStyles: Record<CategoryType, {
             via-category-unarmed/5
             to-gray-dark
         `,
+        gradientFromRight:'from-category-unarmed/70',
         text: 'text-category-unarmed',
         hint: 'text-category-unarmed/70',
         badge: 'border-category-unarmed/40 text-gray-light',
     },
 
-    [CategoryType.EXPLOSIF]: {
+    [CategoryType.EXPLOSIVE]: {
         gradient: `
             bg-gradient-to-b
             from-category-explosive/30
@@ -66,6 +71,7 @@ export const userCategoryStyles: Record<CategoryType, {
             via-category-explosive/5
             to-gray-dark
         `,
+        gradientFromRight:'from-category-explosive/70',
         text: 'text-category-explosive',
         hint: 'text-category-explosive/70',
         badge: 'border-category-explosive/40 text-gray-light',
@@ -79,6 +85,7 @@ export const userCategoryStyles: Record<CategoryType, {
             via-category-hacker/5
             to-gray-dark
         `,
+        gradientFromRight:'from-category-hacker/70',
         text: 'text-category-hacker',
         hint: 'text-category-hacker/70',
         badge: 'border-category-hacker/40 text-gray-light',

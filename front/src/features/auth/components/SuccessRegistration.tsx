@@ -37,7 +37,7 @@ export const SuccessRegistration = () => {
 
             <CardFooter>
                 <Link to="/login" className="w-full">
-                    <Button>
+                    <Button size='full'>
                         Retour à la connexion
                     </Button>
                 </Link>

@@ -12,6 +12,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -54,7 +56,7 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private UserRank rank = UserRank.MEMBRE;
+    private UserRank rank = UserRank.MEMBER;
 
     @Column(nullable = false)
     private Integer currentMoney = 100;
@@ -93,4 +95,28 @@ public class User {
     @UpdateTimestamp
     private LocalDateTime updatedAt = LocalDateTime.now();
 
+    // L'utilisateur peut avoir plusieurs favoris
+    @ManyToMany
+    @JoinTable(
+            name = "user_favorites",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "favorite_user_id")
+    )
+    private Set<User> favorites = new HashSet<>();
+
+    // Et être favori de plusieurs utilisateurs
+    @ManyToMany(mappedBy = "favorites")
+    private Set<User> favoritedBy = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return id != null && id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

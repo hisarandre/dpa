@@ -1,6 +1,9 @@
 package com.dpa.back.service;
 
 import com.dpa.back.dto.user.UserProfileUpdateRequest;
+import com.dpa.back.enums.UserCategory;
+import com.dpa.back.enums.UserFilter;
+import com.dpa.back.enums.UserRank;
 import com.dpa.back.exception.UserNotFoundException;
 import com.dpa.back.mapper.UserMapper;
 import com.dpa.back.model.User;
@@ -9,9 +12,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -66,4 +69,50 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    public List<User> getUsersWithFilters(Long userId, UserFilter filter, String search) {
+
+        search = (search == null || search.isBlank())
+                ? null
+                : search.toLowerCase();
+
+        return switch (filter) {
+            case FAVORITES -> userRepository.findFavoritesByUserId(userId, userId, search);
+
+            case HIGH_RANKS -> userRepository.findByRanksAndSearch(
+                    List.of(UserRank.BOSS, UserRank.CAPTAIN),
+                    userId,
+                    search
+            );
+
+            case MELEE, FIREARM, HAND_TO_HAND, EXPLOSIVE, HACKER ->
+                    userRepository.findByCategoryAndSearch(
+                            UserCategory.valueOf(filter.name()),
+                            userId,
+                            search
+                    );
+
+            default -> userRepository.findAllWithSearch(userId, search);
+        };
+    }
+
+    @Transactional
+    public void toggleFavorite(Long currentUserId, Long targetUserId) {
+
+        if (currentUserId.equals(targetUserId)) {
+            throw new IllegalArgumentException("You cannot favorite yourself");
+        }
+
+        User currentUser = getUserById(currentUserId);
+        User targetUser = getUserById(targetUserId);
+
+        Set<User> favorites = currentUser.getFavorites();
+
+        if (favorites.contains(targetUser)) {
+            favorites.remove(targetUser);
+        } else {
+            favorites.add(targetUser);
+        }
+    }
+
 }

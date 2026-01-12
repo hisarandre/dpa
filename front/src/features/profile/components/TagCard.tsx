@@ -1,13 +1,13 @@
 import { Button } from "@/shared/components/ui/button";
 import { useState } from "react";
 import { Card, CardContent, CardHeader } from "@/shared/components/ui/card";
-import { Upload } from "lucide-react";
-import type { UserProfileType } from "@/features/user/types/userProfile.type";
+import { Upload} from "lucide-react";
+import type { UserProfileType } from "@/features/profile/types/userProfile.type";
 import {ErrorAlert} from "@/shared/components/errorAlert";
 
 interface ReferenceCardProps {
     profile: UserProfileType;
-    onSave: (file: File) => Promise<void>;
+    onSave?: (file: File) => Promise<void>;
 }
 
 export function TagCard({ profile, onSave }: ReferenceCardProps) {
@@ -18,6 +18,8 @@ export function TagCard({ profile, onSave }: ReferenceCardProps) {
     const ALLOWED_TYPES = ['image/png'];
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!onSave) return;
+
         const file = e.target.files?.[0];
         if (!file) return;
 
@@ -56,16 +58,18 @@ export function TagCard({ profile, onSave }: ReferenceCardProps) {
         <Card variant="dpa">
             <CardHeader className="flex justify-end">
                 <label htmlFor="tag-upload">
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        disabled={isUploading}
-                        asChild
-                    >
+                    {onSave && (
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            disabled={isUploading}
+                            asChild
+                        >
                         <span className="cursor-pointer">
                             {isUploading ? "..." : <Upload className="h-4 w-4" />}
                         </span>
-                    </Button>
+                        </Button>
+                    )}
                 </label>
                 <input
                     id="tag-upload"

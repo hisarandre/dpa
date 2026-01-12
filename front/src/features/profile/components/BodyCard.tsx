@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/shared/components/ui/card";
 import { Pencil } from "lucide-react";
 import { InfoGrid, InfoRow } from "@/shared/components/infoRow";
-import type { UserProfileType } from "@/features/user/types/userProfile.type";
+import type { UserProfileType } from "@/features/profile/types/userProfile.type";
 import { bodyInfoSchema, type BodyInfo } from "@/features/profile/schemas/userProfile.schema";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,7 +15,7 @@ import {ColorDisplay} from "@/shared/components/colorDisplay";
 
 interface BodyInfoCardProps {
     profile: UserProfileType;
-    onSave: (data: BodyInfo) => Promise<void>;
+    onSave?: (data: BodyInfo) => Promise<void>;
 }
 
 export function BodyCard({ profile, onSave }: BodyInfoCardProps) {
@@ -35,6 +35,8 @@ export function BodyCard({ profile, onSave }: BodyInfoCardProps) {
         });
 
     const onSubmit = async (data: BodyInfo) => {
+        if (!onSave) return
+
         try {
             console.log(data);
             await onSave(data);
@@ -152,9 +154,15 @@ export function BodyCard({ profile, onSave }: BodyInfoCardProps) {
     return (
         <Card variant="dpa">
             <CardHeader className="flex justify-end">
-                <Button variant="ghost" size="icon" onClick={() => setIsEditing(true)}>
-                    <Pencil className="h-4 w-4" />
-                </Button>
+                {onSave && (
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setIsEditing(true)}
+                    >
+                        <Pencil className="h-4 w-4" />
+                    </Button>
+                )}
             </CardHeader>
 
             <CardContent>

@@ -13,7 +13,6 @@ interface UserHeaderProps {
 
 export function UserHeader({user}: UserHeaderProps) {
     const styles = userCategoryStyles[user.category]
-    // const styles = userCategoryStyles['ARMES_BLANCHES']
 
     return (
         <div className={`relative overflow-hidden flex items-center justify-between sm:rounded-2xl px-10 py-10 ${styles.gradient}`}>
@@ -39,10 +38,7 @@ export function UserHeader({user}: UserHeaderProps) {
                         }}
                     />
                     <img
-                        src={
-                            user.avatarUrl ||
-                            placeHolder
-                        }
+                        src={user.avatarUrl || placeHolder }
                         alt="Profile picture"
                         className="relative size-18 rounded-full border-8 border-gray-dark/75 object-cover"
                     />

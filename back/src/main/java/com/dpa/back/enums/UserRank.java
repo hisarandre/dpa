@@ -1,9 +1,8 @@
 package com.dpa.back.enums;
 
 public enum UserRank {
-    MEMBRE("Membre"),
-    SOUS_BOSS("Sous-boss"),
-    CAPITAINE("Capitaine"),
+    MEMBER("Membre"),
+    CAPTAIN("Capitaine"),
     BOSS("Boss");
 
     private final String displayName;

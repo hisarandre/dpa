@@ -1,6 +1,6 @@
 import { ArrowLeft, Camera } from "lucide-react";
 import { motion, easeInOut } from "framer-motion";
-import type { UserProfileType } from "@/features/user/types/userProfile.type";
+import type { UserProfileType } from "@/features/profile/types/userProfile.type";
 import { userCategoryStyles } from "@/styles/userCategoryStyles";
 import logo from "@/assets/images/logo.svg";
 import placeHolder from "@/assets/images/placeholder.png";

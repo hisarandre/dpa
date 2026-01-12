@@ -7,6 +7,8 @@ import PublicRoute from '@/features/auth/routes/PublicRoute'
 import {UserProvider} from "@/features/user/context/UserProvider";
 import { AuthProvider } from '@/features/auth/context/AuthProvider'
 import ProfilePage from "@/features/profile/pages/ProfilePage";
+import ContactsPage from "@/features/contacts/pages/ContactsPage";
+import ContactProfilePage from "@/features/contacts/pages/ContactProfilePage";
 
 function App() {
     return (
@@ -43,6 +45,22 @@ function App() {
                             element={
                                 <ProtectedRoute>
                                     <ProfilePage />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/contacts"
+                            element={
+                                <ProtectedRoute>
+                                    <ContactsPage />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/users/:id"
+                            element={
+                                <ProtectedRoute>
+                                    <ContactProfilePage />
                                 </ProtectedRoute>
                             }
                         />

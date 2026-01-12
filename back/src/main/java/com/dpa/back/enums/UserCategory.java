@@ -2,10 +2,10 @@ package com.dpa.back.enums;
 
 public enum UserCategory {
     DEFAULT("Par défaut"),
-    ARMES_BLANCHES("Armes blanches"),
-    ARMES_A_FEU("Armes à feu"),
-    MAINS_NUES("Mains nues"),
-    EXPLOSIF("Explosif"),
+    MELEE("Armes blanches"),
+    FIREARM("Armes à feu"),
+    HAND_TO_HAND("Mains nues"),
+    EXPLOSIVE("Explosif"),
     HACKER("Hacker");
 
     private final String displayName;

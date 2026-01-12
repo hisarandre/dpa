@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/shared/components/ui/card";
 import { Pencil } from "lucide-react";
 import { InfoGrid, InfoRow } from "@/shared/components/infoRow";
-import type { UserProfileType } from "@/features/user/types/userProfile.type";
+import type { UserProfileType } from "@/features/profile/types/userProfile.type";
 import { weaponInfoSchema, type WeaponInfo } from "@/features/profile/schemas/userProfile.schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,14 +11,14 @@ import { InputDpa } from "@/shared/components/inputDpa";
 
 interface WeaponCardProps {
     profile: UserProfileType;
-    onSave: (data: WeaponInfo) => Promise<void>;
+    onSave?: (data: WeaponInfo) => Promise<void>;
 }
 
 export function WeaponCard({ profile, onSave }: WeaponCardProps) {
     const [isEditing, setIsEditing] = useState(false);
 
     // Vérifier si l'utilisateur peut avoir une arme secondaire (tous sauf MEMBRE)
-    const canHaveSecondWeapon = profile.rank !== 'MEMBRE';
+    const canHaveSecondWeapon = profile.rank !== 'MEMBER';
 
     const { register, handleSubmit, formState: { errors, isSubmitting }, reset } =
         useForm<WeaponInfo>({
@@ -31,6 +31,8 @@ export function WeaponCard({ profile, onSave }: WeaponCardProps) {
         });
 
     const onSubmit = async (data: WeaponInfo) => {
+        if (!onSave) return
+
         try {
             // Si pas autorisé, forcer weapon2 à null
             if (!canHaveSecondWeapon) {
@@ -109,9 +111,15 @@ export function WeaponCard({ profile, onSave }: WeaponCardProps) {
     return (
         <Card variant="dpa">
             <CardHeader className="flex justify-end">
-                <Button variant="ghost" size="icon" onClick={() => setIsEditing(true)}>
-                    <Pencil className="h-4 w-4" />
-                </Button>
+                {onSave && (
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setIsEditing(true)}
+                    >
+                        <Pencil className="h-4 w-4" />
+                    </Button>
+                )}
             </CardHeader>
             <CardContent>
                 <InfoGrid>
